@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.7-node
+    resource_class: medium
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: build Docker image
+          command: |
+            docker image build --no-cache -t customruby .
+      - run:
+          name: list images
+          command: docker image ls
+      - run:
+          name: test image
+          command: |
+            docker container run --entrypoint=/bin/sh --name=customruby customruby bundle exec puma --help
