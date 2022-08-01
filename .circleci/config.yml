@@ -19,4 +19,4 @@ jobs:
       - run:
           name: test image
           command: |
-            docker container run --entrypoint=/bin/sh --name=customruby customruby echo $PATH && ls -laH /usr/local/bin/ && bundle exec puma --help
+            docker container run --name=customruby customruby printenv PATH && ls -laH /usr/local/bin/ && bundle exec puma --help
