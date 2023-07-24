@@ -1,22 +1,27 @@
 version: 2.1
 
 jobs:
-  build:
+  remote_docker:
+    parameters:
+      docker-version:
+        type: string
+        description: "See https://circleci.com/docs/building-docker-images/#docker-version"
     docker:
-      - image: circleci/ruby:2.6.7-node
-    resource_class: medium
+      - image:
+    # default
+    resource_class: "large"
     steps:
-      - checkout
       - setup_remote_docker:
-          version: 20.10.7
-      - run:
-          name: build Docker image
-          command: |
-            docker image build --no-cache -t customruby .
-      - run:
-          name: list images
-          command: docker image ls
-      - run:
-          name: test image
-          command: |
-            docker container run --name=customruby customruby printenv PATH && ls -laH /usr/local/bin/ && cd /dashboard && bundle exec puma --help
+          version: << parameters.docker-version >>
+      - run: docker system info
+
+workflows:
+  main:
+    jobs:
+      remote_docker:
+        matrix:
+          parameters:
+            docker-version:
+              - 20.10.24
+              # Docker v24.x not supported
+              - 24.0.2
