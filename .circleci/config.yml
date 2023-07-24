@@ -18,10 +18,10 @@ jobs:
 workflows:
   main:
     jobs:
-      remote_docker:
-        matrix:
-          parameters:
-            docker-version:
-              - 20.10.24
-              # Docker v24.x not supported
-              - 24.0.2
+      - remote_docker:
+          matrix:
+            parameters:
+              docker-version:
+                - 20.10.24
+                # Docker v24.x not supported
+                - 24.0.2
