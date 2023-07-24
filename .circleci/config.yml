@@ -7,8 +7,8 @@ jobs:
         type: string
         description: "See https://circleci.com/docs/building-docker-images/#docker-version"
     docker:
-      - image:
-    # default
+      - image: cimg/base:current
+    # NOTE: also defaults to large
     resource_class: "large"
     steps:
       - setup_remote_docker:
