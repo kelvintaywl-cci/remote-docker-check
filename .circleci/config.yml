@@ -13,8 +13,8 @@ jobs:
       - setup_remote_docker:
           version: << parameters.docker >>
       - run: |
-          docker --version
-          docker-compose --version
+          docker version
+          docker-compose version
       - run:
           name: build Docker image
           command: |
