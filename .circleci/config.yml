@@ -12,6 +12,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: << parameters.docker >>
+      - run: printenv DOCKER_HOST || true
       - run: |
           docker version
           docker-compose version
