@@ -31,8 +31,7 @@ workflows:
           matrix:
             parameters:
               docker:
-                - 20.10.14
-                - 20.10.24
+                - 20.10.23
                 - docker23
                 - edge
                 
